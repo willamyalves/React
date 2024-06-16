@@ -22,6 +22,27 @@ function App() {
     getData();
   }, [])
 
+  const handleSubmit = async (e)=>{
+    
+    e.preventDefault();
+
+    const product = {
+      name, 
+      price
+    };
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(product)
+    })
+    const data = await response.json();
+    
+    setProducts((prevProducts)=>[...prevProducts, data])
+  }
+
   return (
       <div className='App'>
         <ul>
