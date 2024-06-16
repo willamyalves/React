@@ -1,4 +1,5 @@
 import { useState, useEffect} from 'react'
+import { useFetch } from './hooks/useFetch';
 import './App.css'
 
 function App() {
@@ -9,6 +10,8 @@ function App() {
 
   const url = "http://localhost:3000/description"
 
+
+  //GET
   useEffect(()=>{
 
     async function getData(){
@@ -21,6 +24,15 @@ function App() {
     }
     getData();
   }, [])
+  //\GET
+
+  //new GET
+
+    const {data} = useFetch(url);
+    console.log(data);
+
+  //\new GET
+
 
   const handleSubmit = async (e)=>{
     
