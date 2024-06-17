@@ -1,84 +1,60 @@
-import { useState, useEffect} from 'react'
+import { useState } from 'react';
 import { useFetch } from './hooks/useFetch';
-import './App.css'
+import { postData } from './hooks/postData';
+import './App.css';
 
 function App() {
-
-  const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const url = "http://localhost:3000/description";
 
-  const url = "http://localhost:3000/description"
+  const { loading, data: items } = useFetch(url, "GET");
 
-
-  //GET
-  useEffect(()=>{
-
-    async function getData(){
-
-      const response = await fetch(url)
-
-      const data = await response.json();
-
-      setProducts(data)
-    }
-    getData();
-  }, [])
-  //\GET
-
-  //new GET
-
-    const {data} = useFetch(url);
-    console.log(data);
-
-  //\new GET
-
-
-  const handleSubmit = async (e)=>{
-    
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const product = {
-      name, 
-      price
-    };
-
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(product)
-    })
-    const data = await response.json();
-    
-    setProducts((prevProducts)=>[...prevProducts, data])
-  }
+    const response = await postData(url, { name, price });
+    if (response) {
+      
+      window.location.reload();
+    }
+  };
 
   return (
-      <div className='App'>
-        <ul>
-          {products.map((product)=>(
-            <li key={product.id} id={product.id}>{product.name} - R${product.price}</li>
-          ))}
-        </ul>
+    <div className='App'>
+      {loading && <p>Carregando...</p>}
+      <ul>
+        {items && items.map((product) => (
+          <li key={product.id} id={product.id}>{product.name} - R${product.price}</li>
+        ))}
+      </ul>
 
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name">
-            <span>Nome do produto</span>
-            <input type="text" name="name" value={name} onChange={(e)=> setName(e.target.value)} placeholder='Digite o nome do produto...'/>
-          </label>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">
+          <span>Nome do produto</span>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder='Digite o nome do produto...'
+          />
+        </label>
 
-          <label htmlFor='price'>
-            <span>Preço</span>
-            <input type="text" name="price" value={price} onChange={(e)=> setPrice(e.target.value)} placeholder='Digite o preço do produto'/>
-          </label>
+        <label htmlFor='price'>
+          <span>Preço</span>
+          <input
+            type="text"
+            name="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder='Digite o preço do produto'
+          />
+        </label>
 
-          <button type="submit">Enviar</button>
-        </form>
-
-      </div>
-  )
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  );
 }
 
-export default App
+export default App;
