@@ -1,0 +1,54 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Laptop",
+      "price": 1500.0
+    },
+    {
+      "id": 2,
+      "name": "Smartphone",
+      "price": 800.0
+    },
+    {
+      "id": 3,
+      "name": "Headphones",
+      "price": 200.0
+    },
+    {
+      "id": 4,
+      "name": "Monitor",
+      "price": 300.0
+    },
+    {
+      "id": 5,
+      "name": "Keyboard",
+      "price": 100.0
+    },
+    {
+      "id": 6,
+      "name": "Mouse",
+      "price": 50.0
+    },
+    {
+      "id": 7,
+      "name": "Printer",
+      "price": 250.0
+    },
+    {
+      "id": 8,
+      "name": "Tablet",
+      "price": 400.0
+    },
+    {
+      "id": 9,
+      "name": "Smartwatch",
+      "price": 150.0
+    },
+    {
+      "id": 10,
+      "name": "External Hard Drive",
+      "price": 120.0
+    }
+  ]
+}
