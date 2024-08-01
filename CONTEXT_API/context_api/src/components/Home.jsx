@@ -1,4 +1,7 @@
 import { useChangeColorContext } from "../hooks/useChangeColorContext";
+import HookUseLayoutEffect from "./HookUseLayoutEffect";
+
+import UseRef from "./UseRef";
 
 const Home = () => {
   const { color, dispatch } = useChangeColorContext();
@@ -13,6 +16,10 @@ const Home = () => {
       <button onClick={() => setColor("RED")}>Vermelho</button>
       <button onClick={() => setColor("BLUE")}>Azul</button>
       <button onClick={() => setColor("ORANGE")}>Laranja</button>
+      <hr />
+      <UseRef />
+      <hr />
+      <HookUseLayoutEffect />
     </>
   );
 };
